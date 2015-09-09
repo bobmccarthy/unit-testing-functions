@@ -9,7 +9,14 @@
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function checkData(inputString) {
-	// your code goes here
+	if (typeof inputString!=='string'){
+		throw 'Invalid Input';
+	}
+	if (inputString.length===3){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 /*
@@ -20,7 +27,13 @@ function checkData(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function concatenateArrays(a, b) {
-	// your code goes here
+	if (Array.isArray(a)!==true && Array.isArray(a)!==true){
+		throw 'Invalid Input';
+	}
+	else{
+	var newArray=a.concat(b);
+	return newArray;
+	}
 }
 
 /*
@@ -33,7 +46,11 @@ function concatenateArrays(a, b) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function fixProperNoun(noun) {
-	// your code goes here
+	if (noun!=='string'){
+		throw 'Invalid Input';
+	}
+
+	noun=noun.charAt(0).toUpperCase;
 }
 
 /*
@@ -55,7 +72,13 @@ function sortLetters(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function absVal(integer) {
-	// your code goes here
+	if (typeof integer!=='number'){
+		throw 'Invalid Input';
+	}
+	if (integer<0){
+		integer=integer*(-1);
+	}
+	return integer;
 }
 
 /*
@@ -66,6 +89,23 @@ function absVal(integer) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 
+function myMin(a,b) {
+	if (typeof a!=='number'||typeof b!=='number'){
+		throw 'Invalid Input';
+	}
+	if (a<b){
+		return a;
+	}
+	else if (b<a){
+		return b;
+	}
+	else if (a===b){
+		throw 'Numbers Are Equal';
+	}
+}
+
+
+
 /*
  * PROBLEM `myMax`: (normal) - Actual Interview Question
  * Write a function called `myMax` that takes an array of integers ans returns
@@ -75,6 +115,12 @@ function absVal(integer) {
  *
  * Insane mode: do this without using a for loop.
  */
+
+function myMax(array) {
+	// your code goes here
+}
+
+
 
 /*
  * PROBLEM `getMonth`: (normal)
@@ -87,12 +133,23 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function getMonth(numMonth) {
+
+}
+
+
+
 
 /*
  * PROBLEM `randomElement`: (normal)
  * Create a function called `randomElement` that takes an array of values and
  * returns one randomly selected value from that array.
  */
+
+function randomElement(array) {
+	
+}
+
 
 /*
  * PROBLEM `studentPairs`: (normal)
@@ -101,6 +158,13 @@ function absVal(integer) {
  * (array of arrays).
  */
 
+function studentPairs(array) {
+	
+}
+
+
+
+
 /*
  * PROBLEM `sumSquares`: (normal)
  * Write a function called `sumSquares` that returns the sum of squares of all
@@ -108,6 +172,13 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function sumSquares(n) {
+	
+}
+
+
+
+
 
 /* 
  * PROBLEM `findMaxDiff`: (normal)
@@ -116,6 +187,11 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function findMaxDiff(array) {
+	
+}
+
+
 
 /*
  * PROBLEM `insertDashes`: (normal)
@@ -125,6 +201,12 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function insertDashes(sentence) {
+	
+}
+
+
+
 
 /*
  * PROBLEM `mySubstring`: (normal)
@@ -137,6 +219,12 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function mySubstring(string,a,b) {
+	
+}
+
+
+
 
 /*
  * PROBLEM `splitSwap`: (hard)
