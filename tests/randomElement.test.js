@@ -2,17 +2,21 @@
 var expect = require('chai').expect;
 var functions = require('../scripts/main.js');
 
-describe('randomElements', function() {
+describe('randomElement', function() {
 	it('should exist', function() {
-        expect(functions.randomElements).not.to.be.undefined;
+        expect(functions.randomElement).not.to.be.undefined;
     });
     it('should throw and error if input is not an array', function() {
-        expect(function(){functions.randomElements(1)}).to.throw('Invalid Input');
+        expect(function(){functions.randomElement(1)}).to.throw('Invalid Input');
     });
     it('should throw and error if input is not a populated array', function() {
-        expect(function(){functions.randomElements([null])}).to.throw('Invalid Input');
+        expect(function(){functions.randomElement()}).to.throw('Invalid Input');
     });
-    it('should return one random value of the array', function() {
-        expect(functions.randomElements([0,'foo','cheeky'])).to.equal('foo');
+    it('should return a random value of the array', function() {
+        var elements = ['a','b','c'];
+        for(var i=0; i<1000; i++){
+            var randomEl = functions.randomElement(elements);
+            expect(elements.indexOf(randomEl)).to.be.above(-1);
+        }
     });
 })

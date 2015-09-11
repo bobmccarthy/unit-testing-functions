@@ -11,7 +11,7 @@ describe('myMax', function() {
         expect(function(){functions.myMax({foo: 1})}).to.throw('Invalid Input');
         expect(function(){functions.myMax('1')}).to.throw('Invalid Input');
     });
-    it('should return smallest number', function(){
+    it('should return largest number', function(){
     	expect(functions.myMax([2,3,4])).to.equal(4);
     })
 })

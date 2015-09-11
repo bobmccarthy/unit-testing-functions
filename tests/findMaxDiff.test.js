@@ -7,12 +7,15 @@ describe('findMaxDiff', function() {
         expect(functions.findMaxDiff).not.to.be.undefined;
     });
     it('should throw and error if input is not an array', function() {
-        expect(function(){functions.sumSquares('a')}).to.throw('Invalid Input');
-        expect(function(){functions.sumSquares(1)}).to.throw('Invalid Input');
-        expect(function(){functions.sumSquares({a:1})}).to.throw('Invalid Input');
+        expect(function(){functions.findMaxDiff('a')}).to.throw('Invalid Input');
+        expect(function(){functions.findMaxDiff(1)}).to.throw('Invalid Input');
+        expect(function(){functions.findMaxDiff({a:1})}).to.throw('Invalid Input');
     });
-    it('should return false if all the numbers are equal', function() {
-        expect(function(){functions.sumSquares([0]===[1])}).to.be.false; 
+    it('should return the maximal difference between 2 pieces of the array', function(){
+        expect(functions.findMaxDiff([2,5,12,20])).to.be.equal(8);
+    });
+    it('should return 0 if all the numbers are the same', function(){
+        expect(functions.findMaxDiff([2,2,2,2])).to.be.equal(0);
     });
     
 })

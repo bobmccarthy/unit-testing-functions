@@ -3,17 +3,31 @@ var expect = require('chai').expect;
 var functions = require('../scripts/main.js');
 
 describe('studentPairs', function() {
-	it('should exist', function() {
+    it('should exist', function() {
         expect(functions.studentPairs).not.to.be.undefined;
     });
-    it('should throw and error if input is not an array', function() {
-        expect(function(){functions.studentPairs(1)}).to.throw('Invalid Input');
+    it('should not accept empty input', function() {
+        expect(function() { functions.studentPairs() }).to.throw('Invalid Input');
     });
-    it('should throw and error if input is not a populated array', function() {
-        expect(function(){functions.studentPairs([null])}).to.throw('Invalid Input');
+    it('should not accept string input', function() {
+        expect(function() { functions.studentPairs('g') }).to.throw('Invalid Input');
+    })
+    it('should return an array', function() {
+        var pairs1 = functions.studentPairs(['a','b']);
+        expect(pairs1).to.be.instanceof(Array);
+        expect(pairs1.length).to.equal(1);
+
+        var pairs2 = functions.studentPairs(['a','b', 'c', 'd']);
+        expect(pairs2).to.be.instanceof(Array);
+        expect(pairs2.length).to.equal(2);
     });
-    
-    it('should match 2 positions of the array together', function() {
-        expect(functions.studentPairs(['bob','jim','joe','sally'])).to.deep.equal(['bob','sally']);
+    it('should work if there are an odd number of students', function() {
+        var pairs = functions.studentPairs(['a','b', 'c', 'd', 'e']);
+        expect(pairs).to.be.instanceof(Array);
+        expect(pairs.length).to.equal(2);
+        expect(pairs[0].length === 3 || pairs[1].length === 3).to.be.true;
     });
-})
+    it('should not allow non-string students', function() {
+        expect(function() { functions.studentPairs([1,2,3]) }).to.throw('Invalid Input: student is not a string');
+    })
+});

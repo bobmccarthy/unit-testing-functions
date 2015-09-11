@@ -12,7 +12,7 @@ describe('mySubstring', function() {
         expect(function(){functions.mySubstring({a:1})}).to.throw('Invalid Input');
     });
     it('should output a string with specified characteristics', function() {
-        expect(functions.sumSquares('abcde', 2, 3)).to.equal('cd'); 
+        expect(functions.mySubstring('abcde', 2, 4)).to.equal('cd'); 
     });
     
 })

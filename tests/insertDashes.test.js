@@ -12,7 +12,7 @@ describe('insertDashes', function() {
         expect(function(){functions.insertDashes({a:1})}).to.throw('Invalid Input');
     });
     it('should insert dashed between letters', function() {
-        expect(functions.sumSquares('a big goose')).to.equal('a b-i-g g-o-o-s-e'); 
+        expect(functions.insertDashes('a big goose call')).to.equal('a b-i-g g-o-o-s-e c-a-l-l'); 
     });
     
 })

@@ -1,5 +1,5 @@
 'use strict';
-
+var _ =require('lodash')
 /*
  * PROBLEM `checkData`: (normal)
  * Write a function that takes a string and checks to make sure that the string
@@ -27,7 +27,7 @@ function checkData(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function concatenateArrays(a, b) {
-	if (Array.isArray(a)!==true && Array.isArray(a)!==true){
+	if (!_.isArray(a) || !_.isArray(b)){
 		throw 'Invalid Input';
 	}
 	else{
@@ -46,11 +46,12 @@ function concatenateArrays(a, b) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function fixProperNoun(noun) {
-	if (noun!=='string'){
+	if (typeof noun!=='string'){
 		throw 'Invalid Input';
 	}
-
-	noun=noun.charAt(0).toUpperCase;
+	var firstLetter=noun.substring(0,1).toUpperCase();
+	noun=firstLetter+noun.substring(1).toLowerCase();
+	return noun;
 }
 
 /*
@@ -61,7 +62,20 @@ function fixProperNoun(noun) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function sortLetters(inputString) {
-	// your code goes here
+	if (typeof inputString!=='string'){
+		throw 'Invalid Input';
+	}
+	var stringArray = [];
+	for (var c=0;c<inputString.length;c++){
+		stringArray[c]=inputString.charAt(c);
+	}
+	stringArray.sort();
+	var finalString='';
+	for (var d=0;d<stringArray.length; d++){
+		finalString=finalString+stringArray[d];
+	}
+	inputString=finalString;
+	return inputString;
 }
 
 /*
@@ -117,8 +131,18 @@ function myMin(a,b) {
  */
 
 function myMax(array) {
-	// your code goes here
+	if (!_.isArray(array)){
+		throw 'Invalid Input'
+	}
+	var big=0;
+	for (var i=0; i<array.length; i++){
+		if (array[i]>big){
+			big=array[i];
+		}
+	}
+	return big;
 }
+
 
 
 
@@ -134,10 +158,18 @@ function myMax(array) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function getMonth(numMonth) {
-
+	if (typeof numMonth!=='number'){
+		throw 'Invalid Input';
+	}
+	var months=['January','February','March','April','May','June','July','August','September','Halloween','Bob Birthday Month','Christmas Month']
+	if (numMonth>0&&numMonth<13){
+		var newMonth=months[numMonth-1];
+		return newMonth;
+	}
+	else{
+		throw 'Invalid Input';
+	}	
 }
-
-
 
 
 /*
@@ -147,7 +179,11 @@ function getMonth(numMonth) {
  */
 
 function randomElement(array) {
-	
+	if (!_.isArray(array)){
+		throw 'Invalid Input';
+	}
+	var rando=Math.floor(Math.random() * array.length);
+	return array[rando];
 }
 
 
@@ -158,8 +194,37 @@ function randomElement(array) {
  * (array of arrays).
  */
 
-function studentPairs(array) {
+function studentPairs(studentNames) {
+	if (!_.isArray(studentNames)){
+		throw 'Invalid Input';
+	}
+	for (var i=0; i<studentNames.length; i++){
+		var currentStudent=studentNames[i];
+		if (!_.isString(currentStudent)){
+			throw 'Invalid Input: student is not a string';
+		}
+	}
+	var pairs=[];
+	var max=Math.floor(studentNames.length/2);
+
+	for (var pairNum=0;pairNum<max;pairNum++){
+		var studentNumber1 = getRandomInt(0,studentNames.length-1);
+		var studentName1=studentNames.splice(studentNumber1,1);
+		
+		var studentNumber2 = getRandomInt(0,studentNames.length-1);
+		var studentName2=studentNames.splice(studentNumber2,1);
+
+		pairs.push([studentName1[0],studentName2[0]]);
+	}
 	
+	if (studentNames.length>0){
+		var pairNumber = getRandomInt(0,pairs.length-1);
+		pairs[pairNumber].push(studentNames[0]);
+	}
+	function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	return pairs;
 }
 
 
@@ -173,10 +238,15 @@ function studentPairs(array) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function sumSquares(n) {
-	
+	if (typeof n!=='number'){
+		throw 'Invalid Input';
+	}
+	var total=0;
+	for (var i = n; i>0; i--){
+		total=total+(i*i);
+	}
+	return total;
 }
-
-
 
 
 
@@ -188,7 +258,25 @@ function sumSquares(n) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function findMaxDiff(array) {
-	
+	if (!_.isArray(array)){
+		throw 'Invalid Input';
+	}
+	var maxDiff=0;
+	for (var i=0; i<array.length-1;i++){
+		if (array[i]>array[i+1]){
+			if (maxDiff<array[i]-array[i+1]){
+				maxDiff=array[i]-array[i+1];
+			}
+		}
+		else if (array[i]<array[i+1]){
+			if (maxDiff<array[i+1]-array[i]){
+				maxDiff=array[i+1]-array[i];
+			}
+		}
+		else{
+		}
+	}
+	return maxDiff;
 }
 
 
@@ -201,11 +289,43 @@ function findMaxDiff(array) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+
+
 function insertDashes(sentence) {
-	
+	if (typeof sentence!=='string'){
+		throw 'Invalid Input';
+	}
+	var words = sentence.split('');
+	console.log(words);
+	console.log(words.length);
+	var newArray=[];
+	var dashed='';
+	console.log (words);
+	newArray[0]=words[0];
+    for (var i = 1; i < words.length; i++) {
+    	console.log(words[i]);
+    	if (words[i]===' '){
+    		newArray[i]=' ';
+    	}
+    	else if (words[i-1]!==' '){
+    		newArray[i]='-'+words[i];
+    	}
+    	else{
+    		newArray[i]=words[i];
+    	}
+    }
+
+    console.log(newArray);
+    console.log(newArray.length);
+    
+    console.log(newArray);
+    dashed=newArray.join('');
+    console.log(dashed);
+    console.log(dashed.length);
+    return dashed;
 }
 
-
+// words=words+words[i][j].splice(i+1,0,'-');
 
 
 /*
@@ -213,14 +333,26 @@ function insertDashes(sentence) {
  * Implement a function called `mySubstring` that can output the substring of
  * the given string within specified bounds.
  *
- * For example: mySubstring('abcde', 2, 3) === 'cd'
+ * For example: mySubstring('abcde', 2, 4) === 'cd'
  *
  * Don't use String.substring in your solution.
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function mySubstring(string,a,b) {
-	
+	if (!_.isString(string)){
+		throw 'Invalid Input';
+	}
+	if (!_.isNumber(a)||!_.isNumber(b)){
+		throw 'Invalid Input';
+	}
+	if (a>b){
+		var newString=string.slice(b,a);
+	}
+	else {
+		var newString=string.slice(a,b);
+	}
+	return newString;
 }
 
 
